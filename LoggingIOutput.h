@@ -12,7 +12,7 @@ namespace loggingSystem {
 
 class IOutput{
 public:
-    virtual void Update(const std::string& message) = 0;
+    virtual void Update(const LoggingCategories cat, const std::string& message) = 0;
     virtual std::set<LoggingCategories> GetLoggingCategories() const = 0;
 };
 

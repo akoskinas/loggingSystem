@@ -14,7 +14,7 @@ namespace loggingSystem{
 class ConcreteFileOutput : public IOutput{
 public:
     ConcreteFileOutput(const std::initializer_list<LoggingCategories> categs, const std::string& fileName);
-    void Update(const std::string& message) override;
+    void Update(LoggingCategories cat, const std::string& message) override;
     std::set<LoggingCategories> GetLoggingCategories() const override;
 private:
     std::set<LoggingCategories> categories;

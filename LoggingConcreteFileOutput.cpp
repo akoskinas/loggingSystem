@@ -10,9 +10,9 @@ ConcreteFileOutput::ConcreteFileOutput(const std::initializer_list<LoggingCatego
               << "with name: " << fileName << std::endl; 
 }
     
-void ConcreteFileOutput::Update(const std::string& message){
-    // to-do
-    std::cout << "output the message: " << message << std::endl;
+void ConcreteFileOutput::Update(LoggingCategories cat, const std::string& message){
+    std::cout << " the received output is: " << std::endl;
+    std::cout << LoggingCategories2String(cat) << message << std::endl;
 }
 
 std::set<LoggingCategories> ConcreteFileOutput::GetLoggingCategories() const{
