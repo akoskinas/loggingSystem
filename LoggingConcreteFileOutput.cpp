@@ -12,7 +12,7 @@ ConcreteFileOutput::ConcreteFileOutput(const std::initializer_list<LoggingCatego
     
 void ConcreteFileOutput::Update(const std::string& message){
     // to-do
-    std::cout << "output the message: " << message << " to output";
+    std::cout << "output the message: " << message << std::endl;
 }
 
 std::set<LoggingCategories> ConcreteFileOutput::GetLoggingCategories() const{

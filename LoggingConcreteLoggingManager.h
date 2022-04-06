@@ -5,7 +5,7 @@
 
 // includes
 #include <string>
-#include <unordered_map>
+#include <map>
 #include "LoggingIOutput.h"
 #include "LoggingILoggingManager.h"
 
@@ -18,7 +18,7 @@ public:
     void Notify(LoggingCategories categ, const std::string& message) const override;
 
 private:
-    std::unordered_map<LoggingCategories, IOutput*> observers;
+    std::multimap<LoggingCategories, IOutput*> observers;
 };
 
 } // end of loggingSystem namespace
@@ -31,7 +31,7 @@ private:
 //     [[nodiscard]] bool Register(IOutout& output) override;
 //     Does it make sense? and how?
 //
-// 2. in order to avoid double entries?
+// 2. in order to avoid double entries while registration:
 //      do I need an additional unique component?
 //      can i base the uniqueness on the pointer?
 //      - in that case, do I need to disable COPY and MOVE semantics?

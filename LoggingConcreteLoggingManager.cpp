@@ -6,18 +6,15 @@
 // remove the following after making sure it works!
 #include <iostream>
 
-#include <set>
-
 namespace loggingSystem {
 
 void ConcreteLoggingManager::Register(IOutput* output){
 
-    for(auto i : output->GetLoggingCategories()){
-        std::cout << i << std::endl;
-    }
-    //observers.insert(output);
-    (void) output;
     std::cout << "registering..." << std::endl;
+
+    for(const LoggingCategories categ : output->GetLoggingCategories()){
+        observers.insert(std::pair<LoggingCategories,IOutput*>(categ,output));
+    }
 }
 
 void ConcreteLoggingManager::Deregister(IOutput* output){
@@ -27,12 +24,20 @@ void ConcreteLoggingManager::Deregister(IOutput* output){
 
 void ConcreteLoggingManager::Notify(LoggingCategories cat, const std::string& message) const {
     std::cout << "Notify called with message: " << message << std::endl;
-    (void) cat;
-    (void) message;    
+    for (auto itr = observers.begin(); itr != observers.end(); itr++){
+        if (itr->first == cat) {
+            itr->second->Update(message);
+        }
+    }
 }
 
 } // end of loggingSystem namespace
 
 // Question:
-// what is a better design, when it comes to assigning the different IOutput to the unordered_map 
+// 1. what is a better design, when it comes to assigning the different IOutput to the unordered_map 
 // with respect to their LoggingCategories that have assigned?
+//
+// 2. @Register: does it make sense to have the iteration of all the elements of the set 
+// taken by reference: i.e 
+//
+// for(const LoggingCategories& categ : output->GetLoggingCategories()){

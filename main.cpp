@@ -14,7 +14,7 @@ int main(){
     // register the file
     myManager.Register(&myFileOutput);
 
-    myManager.Notify(loggingSystem::LoggingCategories::Info,"this");
+    myManager.Notify(loggingSystem::LoggingCategories::Info,"testMsg");
 }
 
 // General questions
