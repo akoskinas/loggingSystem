@@ -18,6 +18,7 @@ void ConcreteLoggingManager::Register(IOutput* output){
 }
 
 void ConcreteLoggingManager::Deregister(IOutput* output){
+    // TO-DO: implement this!
     //observers.erase(observers.find(output));
     (void) output;
 }
@@ -26,7 +27,7 @@ void ConcreteLoggingManager::Notify(LoggingCategories cat, const std::string& me
     std::cout << "Notify called with message: " << message << std::endl;
     for (auto itr = observers.begin(); itr != observers.end(); itr++){
         if (itr->first == cat) {
-            itr->second->Update(message);
+            itr->second->Update(itr->first,message);
         }
     }
 }
