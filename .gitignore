@@ -2,4 +2,5 @@
 .vscode/*
 
 # ignore the executable
-main
+*.a
+
