@@ -3,6 +3,8 @@
 #ifndef LOGGINGCATEGORIES_H
 #define LOGGINGCATEGORIES_H
 
+#include <string>
+
 namespace loggingSystem {
 
 enum class LoggingCategories
@@ -10,9 +12,11 @@ enum class LoggingCategories
     Info, Debug, Warning, Error
 };
 
+std::string LoggingCategories2String(LoggingCategories cat);
+
 } // namespace loggingSystem
 
 #endif 
 
 // Questions:
-// 1. should the LoggingCategories be placed in a container?
+// 1. should the LoggingCategories be placed in a container like a vector or sth?
