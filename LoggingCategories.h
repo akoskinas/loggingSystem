@@ -1,0 +1,18 @@
+// this header file contains the different available logging categories
+
+#ifndef LOGGINGCATEGORIES_H
+#define LOGGINGCATEGORIES_H
+
+namespace loggingSystem {
+
+enum class LoggingCategories
+{
+    Info, Debug, Warning, Error
+};
+
+} // namespace loggingSystem
+
+#endif 
+
+// Questions:
+// 1. should the LoggingCategories be placed in a container?

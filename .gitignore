@@ -1,0 +1,5 @@
+# ignore the editor configuration folder
+.vscode/*
+
+# ignore the executable
+main
