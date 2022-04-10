@@ -8,16 +8,16 @@
 
 namespace loggingSystem {
 
-void ConcreteLoggingManager::Register(IOutput* output){
+void ConcreteLoggingManager::Register(const std::initializer_list<LoggingCategories> categs, IOutput* output){
 
     std::cout << "registering..." << std::endl;
 
-    for(const LoggingCategories categ : output->GetLoggingCategories()){
+    for(const LoggingCategories categ : categs){
         observers.insert(std::pair<LoggingCategories,IOutput*>(categ,output));
     }
 }
 
-void ConcreteLoggingManager::Deregister(IOutput* output){
+void ConcreteLoggingManager::Deregister(const std::initializer_list<LoggingCategories> categs, IOutput* output){
     // TO-DO: implement this!
     //observers.erase(observers.find(output));
     (void) output;
@@ -27,7 +27,7 @@ void ConcreteLoggingManager::Notify(LoggingCategories cat, const std::string& me
     std::cout << "Notify called with message: " << message << std::endl;
     for (auto itr = observers.begin(); itr != observers.end(); itr++){
         if (itr->first == cat) {
-            itr->second->Update(itr->first,message);
+            itr->second->Update(LoggingCategories2String(itr->first)+ "\t" + message);
         }
     }
 }

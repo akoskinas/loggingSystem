@@ -5,19 +5,16 @@
 
 #include "LoggingIOutput.h"
 #include "LoggingCategories.h"
-#include <string>
-#include <initializer_list>
-#include <set>
 
 namespace loggingSystem{
 
 class ConcreteMonitorOutput : public IOutput{
 public:
-    ConcreteMonitorOutput(const std::initializer_list<LoggingCategories> categs, const std::string& monitorName);
-    void Update(LoggingCategories cat, const std::string& message) override;
-    std::set<LoggingCategories> GetLoggingCategories() const override;
+    ConcreteMonitorOutput(const std::string& monitorName);
+    void Update(const std::string& message) override;
+    std::string GetName() const override;
 private:
-    std::set<LoggingCategories> categories;
+    std::string mName;
 };
 
 } // end of loggingSystem namespace

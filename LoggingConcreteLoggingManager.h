@@ -13,10 +13,9 @@ namespace loggingSystem {
 
 class ConcreteLoggingManager : public ILoggingManager{
 public:
-    void Register(IOutput* output) override;
-    void Deregister(IOutput* output) override;
+    void Register(const std::initializer_list<LoggingCategories> categs, IOutput* output) override;
+    void Deregister(const std::initializer_list<LoggingCategories> categs, IOutput* output) override;
     void Notify(LoggingCategories categ, const std::string& message) const override;
-
 private:
     std::multimap<LoggingCategories, IOutput*> observers;
 };

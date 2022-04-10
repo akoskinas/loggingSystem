@@ -4,20 +4,19 @@
 #define LOGGINGCONCRETEFILEOUTPUT_H
 
 #include "LoggingIOutput.h"
-#include "LoggingCategories.h"
-#include <string>
-#include <initializer_list>
-#include <set>
+#include <memory>
+#include <fstream>
 
 namespace loggingSystem{
 
 class ConcreteFileOutput : public IOutput{
 public:
-    ConcreteFileOutput(const std::initializer_list<LoggingCategories> categs, const std::string& fileName);
-    void Update(LoggingCategories cat, const std::string& message) override;
-    std::set<LoggingCategories> GetLoggingCategories() const override;
+    ConcreteFileOutput(const std::string& fileName);
+    void Update(const std::string& message) override;
+    std::string GetName() const override;
 private:
-    std::set<LoggingCategories> categories;
+    std::string mName;
+    std::unique_ptr<std::fstream> fileHandler{nullptr};
 };
 
 } // end of loggingSystem namespace

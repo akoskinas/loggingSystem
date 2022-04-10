@@ -14,16 +14,16 @@ int main(){
     ConcreteLoggingManager myManager;
 
     // define a new file output
-    ConcreteFileOutput myFileOutput({LoggingCategories::Info, LoggingCategories::Error},"new file");
+    ConcreteFileOutput myFileOutput("new file");
 
     // register the new file output
-    myManager.Register(&myFileOutput);
+    myManager.Register({LoggingCategories::Info, LoggingCategories::Error},&myFileOutput);
 
     // define a new monitor output
-    ConcreteMonitorOutput myMonitorOutput({LoggingCategories::Info, LoggingCategories::Warning},"new monitor");
+    ConcreteMonitorOutput myMonitorOutput("new monitor");
 
     // register the new monitor output
-    myManager.Register(&myMonitorOutput);
+    myManager.Register({LoggingCategories::Info, LoggingCategories::Warning},&myMonitorOutput);
 
     // test Notify functionality
     myManager.Notify(LoggingCategories::Info, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg1");
@@ -33,7 +33,9 @@ int main(){
 
 // General questions
 // 1. why can't I have a container (e.g a vector or a set) of references??
-// 
+// 2. how can i make it such that the __FILE__ and the __LINE__ are called implicitly,
+//  without the need for the caller to specify them?
+//  this allows for each output to display the file and the line that the message was sent from 
 
 // to-do:
 // 1. disable copy semantics to ensure that no duplicate output can be registered
@@ -41,9 +43,5 @@ int main(){
 //  - default: remove output from all categories
 //  - provide also option for removal of only some categories
 // 3. implement unit testing using the framework
-// 4. update register - remove the LoggingCategories from the LoggingOutput
-//  - reason: the same folder could be used by different programs 
-//  - the categories refer to the registration - not to the output itself!
 // 5. add a name data member to the Output classes
-// 6. add a parameter to the notify, so that the outputs know from whom they have been notified!
-// - e.g name
+// add a timestamp

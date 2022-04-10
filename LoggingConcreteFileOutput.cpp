@@ -2,21 +2,30 @@
 
 #include "LoggingConcreteFileOutput.h"
 #include <iostream>
+#include <filesystem>
 
 namespace loggingSystem{
 
-ConcreteFileOutput::ConcreteFileOutput(const std::initializer_list<LoggingCategories> categs, const std::string& fileName) : categories{categs}{
-    std::cout << "ConcreteFileOutput ctor called "
-              << "with name: " << fileName << std::endl; 
+ConcreteFileOutput::ConcreteFileOutput(const std::string& fileName) : mName{fileName} {
+    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    fileHandler = std::make_unique<std::fstream>();
+    fileHandler->open(mName, std::ios::out);
+    if (!fileHandler){
+        std::cerr << "Creation of file: " << GetName() << " failed!" << '\n';
+    }    
 }
     
-void ConcreteFileOutput::Update(LoggingCategories cat, const std::string& message){
-    std::cout << " the received output is: " << std::endl;
-    std::cout << LoggingCategories2String(cat) << message << std::endl;
+void ConcreteFileOutput::Update(const std::string& message){
+    //std::string temp_str = message;
+    //fileHandler->operator<<(temp_str);
+    fileHandler->operator<<("test");
 }
 
-std::set<LoggingCategories> ConcreteFileOutput::GetLoggingCategories() const{
-    return categories;
+std::string ConcreteFileOutput::GetName() const {
+    return mName;
 }
 
 } // end of loggingSystem namespace
+
+// Questions
+// 1. how to handle better the file?
