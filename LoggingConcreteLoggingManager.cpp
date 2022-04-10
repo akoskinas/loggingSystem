@@ -40,5 +40,8 @@ void ConcreteLoggingManager::Notify(LoggingCategories cat, const std::string& me
 //
 // 2. @Register: does it make sense to have the iteration of all the elements of the set 
 // taken by reference: i.e 
-//
 // for(const LoggingCategories& categ : output->GetLoggingCategories()){
+//
+// 3. is there any benefit in incluing a uniqueID that the LoggingManager will assign to
+// each registered output?
+//

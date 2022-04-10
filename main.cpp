@@ -5,6 +5,7 @@
 #include "LoggingConcreteFileOutput.h"
 #include "LoggingConcreteMonitorOutput.h"
 
+#include <iostream>
 using namespace loggingSystem;
 
 int main(){
@@ -25,7 +26,8 @@ int main(){
     myManager.Register(&myMonitorOutput);
 
     // test Notify functionality
-    myManager.Notify(LoggingCategories::Info,"testMsg1");
+    myManager.Notify(LoggingCategories::Info, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg1");
+
     myManager.Notify(LoggingCategories::Error,"testMsg2");
 }
 
@@ -43,3 +45,5 @@ int main(){
 //  - reason: the same folder could be used by different programs 
 //  - the categories refer to the registration - not to the output itself!
 // 5. add a name data member to the Output classes
+// 6. add a parameter to the notify, so that the outputs know from whom they have been notified!
+// - e.g name
