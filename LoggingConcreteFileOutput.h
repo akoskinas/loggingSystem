@@ -16,7 +16,7 @@ public:
     std::string GetName() const override;
 private:
     std::string mName;
-    std::unique_ptr<std::fstream> fileHandler{nullptr};
+    std::unique_ptr<std::ofstream> fileHandler{nullptr};
 };
 
 } // end of loggingSystem namespace

@@ -5,13 +5,13 @@
 
 namespace loggingSystem{
 
-ConcreteMonitorOutput::ConcreteMonitorOutput(const std::string& monitorName){
-    std::cout << "ConcreteMonitorOutput ctor called "
-              << "with name: " << monitorName << std::endl; 
+ConcreteMonitorOutput::ConcreteMonitorOutput(const std::string& monitorName): mName{monitorName}{
+    //std::cout << "ConcreteMonitorOutput ctor called "
+    //          << "with name: " << monitorName << std::endl;
 }
     
 void ConcreteMonitorOutput::Update(const std::string& message){
-    std::cout << " the received monitor output is: " << std::endl;
+    //std::cout << " the received monitor output is: " << std::endl;
     std::cout << message << std::endl;
 }
 

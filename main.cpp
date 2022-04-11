@@ -14,7 +14,7 @@ int main(){
     ConcreteLoggingManager myManager;
 
     // define a new file output
-    ConcreteFileOutput myFileOutput("new file");
+    ConcreteFileOutput myFileOutput("new_file.log");
 
     // register the new file output
     myManager.Register({LoggingCategories::Info, LoggingCategories::Error},&myFileOutput);
@@ -27,8 +27,12 @@ int main(){
 
     // test Notify functionality
     myManager.Notify(LoggingCategories::Info, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg1");
+    myManager.Notify(LoggingCategories::Error, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg2");
 
-    myManager.Notify(LoggingCategories::Error,"testMsg2");
+    myManager.Deregister({LoggingCategories::Error},&myFileOutput);
+    myManager.Notify(LoggingCategories::Info, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg3");
+    myManager.Notify(LoggingCategories::Error, std::string{__FILE__} + ": " + std::to_string(__LINE__) + " : " + "testMsg4");
+
 }
 
 // General questions

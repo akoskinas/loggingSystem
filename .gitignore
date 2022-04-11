@@ -4,3 +4,6 @@
 # ignore the executable
 *.a
 
+# ignore log files that are produced
+*.log
+

@@ -2,13 +2,12 @@
 
 #include "LoggingConcreteFileOutput.h"
 #include <iostream>
-#include <filesystem>
+#include <cstring>
 
 namespace loggingSystem{
 
 ConcreteFileOutput::ConcreteFileOutput(const std::string& fileName) : mName{fileName} {
-    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
-    fileHandler = std::make_unique<std::fstream>();
+    fileHandler = std::make_unique<std::ofstream>();
     fileHandler->open(mName, std::ios::out);
     if (!fileHandler){
         std::cerr << "Creation of file: " << GetName() << " failed!" << '\n';
@@ -16,9 +15,11 @@ ConcreteFileOutput::ConcreteFileOutput(const std::string& fileName) : mName{file
 }
     
 void ConcreteFileOutput::Update(const std::string& message){
-    //std::string temp_str = message;
-    //fileHandler->operator<<(temp_str);
-    fileHandler->operator<<("test");
+    for (char c :message){
+        fileHandler->put(c);
+    }
+    fileHandler->put('\n');
+
 }
 
 std::string ConcreteFileOutput::GetName() const {
