@@ -7,19 +7,20 @@
 namespace loggingSystem{
 
 ConcreteFileOutput::ConcreteFileOutput(const std::string& fileName) : mName{fileName} {
-    fileHandler = std::make_unique<std::ofstream>();
-    fileHandler->open(mName, std::ios::out);
+    fileHandler.open(mName, std::ios::out);
     if (!fileHandler){
         std::cerr << "Creation of file: " << GetName() << " failed!" << '\n';
     }    
 }
     
 void ConcreteFileOutput::Update(const std::string& message){
-    for (char c :message){
-        fileHandler->put(c);
-    }
-    fileHandler->put('\n');
-
+    if (!fileHandler) { return; }
+    fileHandler << message << '\n';
+    
+    fileHandler.flush(); 
+        // write immediately to the file (flush the in-memory buffer)
+        // slower, but avoids data loss in case of crashing
+        // maybe could be an option on ConcreteFileOutput constructor
 }
 
 std::string ConcreteFileOutput::GetName() const {
@@ -27,6 +28,3 @@ std::string ConcreteFileOutput::GetName() const {
 }
 
 } // end of loggingSystem namespace
-
-// Questions
-// 1. how to handle better the file?

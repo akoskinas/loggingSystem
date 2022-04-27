@@ -6,7 +6,7 @@
 // includes
 #include "LoggingIOutput.h"
 #include "LoggingCategories.h"
-#include "set"
+#include <set>
 
 namespace loggingSystem {
 

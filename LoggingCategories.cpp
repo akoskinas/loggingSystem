@@ -4,31 +4,17 @@
 
 namespace loggingSystem {
 
-std::string LoggingCategories2String(LoggingCategories cat)
+constexpr const char* LoggingCategories2String(LoggingCategories cat)
 {
-    std::string convertedString{};
     switch (cat)
     {
-    case LoggingCategories::Info:
-        convertedString = "Info:";
-        break;
-
-    case LoggingCategories::Debug:
-        convertedString = "Debug:";
-        break;
-
-    case LoggingCategories::Warning:
-        convertedString = "Warning:";
-        break;
-
-    case LoggingCategories::Error:
-        convertedString = "Error:";
-        break;
-
-    default:
-        break;
+        case LoggingCategories::Info:    return "Info";
+        case LoggingCategories::Debug:   return "Debug";
+        case LoggingCategories::Warning: return "Warning";
+        case LoggingCategories::Error:   return "Error";
     }
-    return convertedString;
+
+    return "UNKNOWN CATEGORY";
 }
 
 } // namespace loggingSystem
