@@ -11,6 +11,8 @@ namespace loggingSystem {
 class IOutput{
 public:
     virtual void Update(const std::string& message) = 0;
+        // maybe string_view could be used here
+
     virtual std::string GetName() const = 0;
 };
 

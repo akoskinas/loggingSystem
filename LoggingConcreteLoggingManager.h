@@ -6,8 +6,10 @@
 // includes
 #include <string>
 #include <map>
+#include <initializer_list>
 #include "LoggingIOutput.h"
 #include "LoggingILoggingManager.h"
+#include "LoggingCategories.h"
 
 namespace loggingSystem {
 
@@ -18,19 +20,10 @@ public:
     void Notify(LoggingCategories categ, const std::string& message) const override;
 private:
     std::multimap<LoggingCategories, IOutput*> observers;
+        // consider `std::map<LoggingCategories, std::set<IOutput*>>`
+        // to avoid accidental double output for the same category
 };
 
 } // end of loggingSystem namespace
 
 #endif
-
-// Questions:
-// 1. to make sure that an output was registered successfully?
-//     I was thinking something like:
-//     [[nodiscard]] bool Register(IOutout& output) override;
-//     Does it make sense? and how?
-//
-// 2. in order to avoid double entries while registration:
-//      do I need an additional unique component?
-//      can i base the uniqueness on the pointer?
-//      - in that case, do I need to disable COPY and MOVE semantics?

@@ -35,17 +35,26 @@ int main(){
 
 }
 
-// General questions
-// 1. why can't I have a container (e.g a vector or a set) of references??
-// 2. how can i make it such that the __FILE__ and the __LINE__ are called implicitly,
-//  without the need for the caller to specify them?
-//  this allows for each output to display the file and the line that the message was sent from 
+template <typename... Args> // variadic parameter pack 
+void notify(ConcreteLoggingManager& manager, LoggingCategories category, const Args&... args)
+{
+    std::ostringstream oss;
+    (oss << ... << args);  // C++17 fold expression
+    manager.Notify(category, oss.str());
+}
+
+// call as `notify(myManager, LoggingCategories::Info, 10, "hello", someStreamableThing);`
+
+// In C++20, you can use `std::source_location` instead of __FILE__ and __LINE__ macros:
+// https://en.cppreference.com/w/cpp/utility/source_location
+
+// Before, you have to use a macro that passes those __FILE__ and __LINE__ macros to some
+// other function call:
+/* 
+#define LOG_NOTIFY(category, message) \
+    myManager.Notify(category, __FILE__, 
+*/
 
 // to-do:
-// 1. disable copy semantics to ensure that no duplicate output can be registered
-// 2. implement deregister
-//  - default: remove output from all categories
-//  - provide also option for removal of only some categories
 // 3. implement unit testing using the framework
-// 5. add a name data member to the Output classes
 // add a timestamp

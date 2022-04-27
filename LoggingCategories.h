@@ -12,11 +12,9 @@ enum class LoggingCategories
     Info, Debug, Warning, Error
 };
 
-std::string LoggingCategories2String(LoggingCategories cat);
+constexpr const char* LoggingCategories2String(LoggingCategories cat);
+// returning `std::string_view` would also be a good idea
 
 } // namespace loggingSystem
 
 #endif 
-
-// Questions:
-// 1. should the LoggingCategories be placed in a container like a vector or sth?
